@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday — For Atchuu 🎂</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #fff4fb;
+      --card: #fff;
+      --accent: #ff4f97;
+      --soft: #ffd6ea;
+      --muted: #6b6b6b;
+      --glass: rgba(255,255,255,0.9);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, var(--bg-1), #fff 60%);
+      color: #241322;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    .wrap {
+      width: 100%;
+      max-width: 980px;
+      margin: 20px auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(18,18,20,0.08);
+      border: 1px solid rgba(240,230,240,0.8);
+      background: var(--card);
+    }
+    header {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 16px 18px;
+      background: linear-gradient(90deg, #fff6fb, #fff9fc);
+    }
+    .logo {
+      width: 64px; height: 64px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ffd6ea, #fff1f7);
+      display: grid; place-items: center;
+      font-weight: 800; color: #8b1143; font-size: 22px;
+      box-shadow: 0 8px 24px rgba(203,78,128,0.06);
+    }
+    header h1 { margin:0; font-size:18px }
+    header p { margin:0; color:var(--muted); font-size:13px }
+
+    nav {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:8px; padding:12px 16px; border-bottom:1px dashed rgba(240,240,240,0.9);
+    }
+    .nav-left { display:flex; gap:8px; align-items:center; }
+    .nav-btn {
+      background:transparent;
+      border:1px solid rgba(230,230,230,0.95);
+      padding:8px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600; color:#6b1d48;
+    }
+    .nav-btn.active { background:linear-gradient(90deg,#fff1f7,#fff7fb); box-shadow:0 8px 26px rgba(203,78,128,0.06); }
+
+    .content {
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      gap:18px;
+      padding:20px;
+    }
+    @media(max-width:920px){ .content{ grid-template-columns:1fr } }
+
+    .viewport { overflow:hidden; border-radius:12px; background:var(--glass); padding:12px }
+    .slides {
+      display:flex;
+      width:500%;
+      transition: transform 700ms cubic-bezier(.2,.9,.25,1);
+      will-change: transform;
+    }
+    .slide {
+      width:100%;
+      padding:14px;
+      flex:0 0 100%;
+    }
+
+    .card {
+      background:white;
+      border-radius:12px;
+      padding:16px;
+      border:1px solid rgba(245,240,250,0.95);
+      box-shadow: 0 10px 30px rgba(18,18,18,0.04);
+      min-height:320px;
+    }
+    h2 { margin:0 0 8px 0; font-size:18px }
+    .muted { color:var(--muted); font-size:13px }
+
+    .controls { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap }
+    .btn {
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid rgba(230,230,230,0.9);
+      background:#fff; cursor:pointer;
+      font-weight:700; color:#6b1d48;
+    }
+    .btn.primary { background: linear-gradient(90deg,#ffb6db,#ffd6ea); border:none; color:#7b1b4a }
+
+    .letter-box {
+      background: linear-gradient(180deg,#fff,#fffaf6);
+      border-radius:12px;
+      padding:14px;
+      border:1px solid rgba(240,240,240,0.9);
+      max-height:340px; overflow:auto;
+    }
+    .para {
+      opacity:0;
+      transform: translateY(14px) scale(.995);
+      transition: all 420ms cubic-bezier(.2,.9,.25,1);
+      margin:10px 0;
+      line-height:1.6;
+      font-size:15px;
+      color:#341a2b;
+    }
+    .para.show { opacity:1; transform: translateY(0) scale(1); }
+
+    .mini-list {
+      display:flex;
+      flex-direction:column;
+      gap:12px; margin-top:12px;
+    }
+    .mini {
+      background: linear-gradient(180deg,#fff0f7,#fff8fb);
+      border-radius:10px;
+      padding:12px;
+      font-weight:700; color:#6b1d48;
+      border:1px solid rgba(245,230,240,0.95);
+      transform-origin:center;
+      opacity:0; transform: translateY(12px) scale(.98);
+      transition: all 420ms cubic-bezier(.2,.9,.25,1);
+    }
+    .mini.show {
+      opacity:1; transform: translateY(0) scale(1);
+    }
+
+    .cartoon-row {
+      display:flex; gap:12px; align-items:center;
+      justify-content:center; margin-top:14px; flex-wrap:wrap;
+    }
+    .cartoon {
+      width:120px; height:120px;
+      border-radius:999px;
+      display:grid; place-items:center;
+      cursor:pointer;
+      background: radial-gradient(circle at 30% 20%, #fff, #ffeef7);
+      border:6px solid rgba(255,158,207,0.18);
+      box-shadow:0 12px 30px rgba(203,78,128,0.08);
+      transition: transform 240ms ease, box-shadow 240ms ease;
+      overflow:hidden;
+    }
+    .cartoon:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow:0 18px 40px rgba(203,78,128,0.12);
+    }
+    .cartoon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 999px;
+    }
+    .cartoon .label {
+      display:block;
+      position:absolute;
+      bottom:8px;
+      font-size:14px;
+      font-weight:700;
+      color:#7b2b53;
+      background: rgba(255,255,255,0.8);
+      padding:2px 6px;
+      border-radius:6px;
+    }
+
+    .playerbox {
+      margin-top:12px;
+      display:flex; flex-direction:column; gap:8px; align-items:center;
+    }
+    audio { width:100%; max-width:300px; }
+
+    .final-center { text-align:center; padding:30px; }
+
+    .small { font-size:13px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">💝</div>
+    <div>
+      <h1>Happy Birthday, Atchuu</h1>
+      <p class="small muted">A little surprise — messages, songs & love</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-left">
+      <button class="nav-btn active" data-index="0">Welcome</button>
+      <button class="nav-btn" data-index="1">Music</button>
+      <button class="nav-btn" data-index="2">Letter</button>
+      <button class="nav-btn" data-index="3">Surprises</button>
+      <button class="nav-btn" data-index="4">Final</button>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button id="prev" class="nav-btn">← Prev</button>
+      <button id="next" class="nav-btn primary">Next →</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div>
+      <div class="viewport card">
+        <div class="slides" id="slides">
+
+          <!-- Slide 0: Welcome -->
+          <div class="slide">
+            <h2>Surprise for Atchuu 🎉</h2>
+            <p class="muted">Tap Next to start — music and messages await.</p>
+            <div class="controls" style="margin-top:16px">
+              <button class="btn primary" id="goMusic">Play Songs</button>
+              <button class="btn" id="goLetter">Open Letter</button>
+            </div>
+          </div>
+
+          <!-- Slide 1: Music -->
+          <div class="slide">
+            <h2>Play Songs</h2>
+            <p class="muted">Tap the cute character to play a song.</p>
+
+            <div class="cartoon-row">
+              <div class="cartoon" id="btnSingari" title="Play Singari">
+                <img src="singari.gif" alt="Singari song">
+                <span class="label">Singari</span>
+              </div>
+              <div class="cartoon" id="btnNaam" title="Play Naam Tera">
+                <img src="naam-tera.gif" alt="Naam Tera song">
+                <span class="label">Naam Tera</span>
+              </div>
+            </div>
+
+            <div class="playerbox">
+              <audio id="player" controls preload="metadata"></audio>
+              <div class="small muted">Use the player to pause or stop.</div>
+            </div>
+
+          </div>
+
+          <!-- Slide 2: Letter (reveal) -->
+          <div class="slide">
+            <h2>A Letter for Atchuu</h2>
+            <p class="muted">Watch the letter reveal with animation.</p>
+            <div style="margin-top:12px">
+              <button class="btn primary" id="revealLetterBtn">Reveal Letter</button>
+              <button class="btn" id="resetLetterBtn">Show All</button>
+            </div>
+            <div class="letter-box" id="letterBox" aria-live="polite" style="margin-top:12px"></div>
+          </div>
+
+          <!-- Slide 3: Surprises (5 minis) -->
+          <div class="slide">
+            <h2>Tiny Surprises</h2>
+            <p class="muted">Click each card below for a little note 😊</p>
+            <div class="mini-list" id="miniList" style="margin-top:12px"></div>
+          </div>
+
+          <!-- Slide 4: Final -->
+          <div class="slide">
+            <div class="final-center">
+              <div style="font-size:56px">🎉💖</div>
+              <h2>Happy Birthday, Atchuu!</h2>
+              <p class="muted">Hope this made your day brighter. Forever yours ♾️🫀</p>
+              <div style="margin-top:14px">
+                <button class="btn primary" id="restart">Start Again</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h3 style="margin:0 0 8px 0">Info</h3>
+        <p class="muted small" style="margin:0">🎀 Theme: Pastel Pink + White & Gold</p>
+        <p class="muted small" style="margin:0">🎵 Songs: Cartoon-buttons → Tap to play</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="toast" style="position:fixed;left:50%;top:12%;transform:translateX(-50%);display:none;background:linear-gradient(90deg,#fff1f7,#fff7fb);color:#6b1d48;padding:10px 14px;border-radius:12px;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,0.06)"></div>
+
+<script>
+  const letterParagraphs = [
+    `Hi Atchuu, HAPPY BIRTHDAY ATCHUUUUUUUU ✨💖 HAVE A GREAT DAY. I know this year have changed Soooooo things. Maybe things didn't go as planned and there were hard times, but still we are together — maybe not as we planned but maybe as good friends.`,
+    `I know sometimes I have really overthought a lot but still you understood that and managed things very well. I don't know what to say but I am really grateful to you that even after having your own problems you still come, listen to my problems and make me feel better.`,
+    `I know you are busy with your studies which is really a good thing — I hope you carry on that. Sometimes I get angry thinking "why isn't she talking?" but soon I understand she is studying and then I tell myself to study too (in which I fail 🥲).`,
+    `So yeah once again HAPPY BIRTHDAY ATCHUUUUUUUU ✨💖 TO MY CLOSEST ONE!! I am always with you whenever you feel low; feel free to talk to me — I will assure you that you will never overshare anything.`,
+    `And yeah I LOVEEEEE YOUUUUUU 💖💖💕 veryyyyyyyyyy muchhhhhhhhhhh. AND I will make sure that I never become a problem in your studies. 😄😄\n\nFOREVER YOURS ♾️🫀`
+  ];
+
+  const miniNotes = [
+    "A little surprise is waiting for you… 🎁✨",
+    "May this year be soft, kind, and magical for you 💖",
+    "You’ve worked so hard… now it’s your time to shine ✨",
+    "I hope today brings you the happiness you always give to others 🌸",
+    "And one more thing… you are loved. More than you know 💖"
+  ];
+
+  const slides = document.querySelector('.slides');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  let current = 0;
+
+  function showSlide(i) {
+    if (i < 0) i = 0; if (i > 4) i = 4;
+    current = i;
+    slides.style.transform = `translateX(-${i*100}%)`;
+    navBtns.forEach(b => b.classList.toggle('active', Number(b.dataset.index) === i));
+    if (i === 2) prepareLetterReveal();
+    if (i === 3) revealMinis();
+  }
+
+  navBtns.forEach(b => b.addEventListener('click', () => showSlide(Number(b.dataset.index))));
+  document.getElementById('next').addEventListener('click', () => showSlide(current+1));
+  document.getElementById('prev').addEventListener('click', () => showSlide(current-1));
+  document.getElementById('goMusic').addEventListener('click', () => showSlide(1));
+  document.getElementById('goLetter').addEventListener('click', () => showSlide(2));
+  document.getElementById('restart').addEventListener('click', () => showSlide(0));
+
+  const toast = document.getElementById('toast');
+  let toastTimer = null;
+  function showToast(msg) {
+    clearTimeout(toastTimer);
+    toast.style.display = 'block';
+    toast.style.opacity = '1';
+    toast.textContent = msg;
+    toastTimer = setTimeout(()=>{
+      toast.style.transition = 'opacity .35s';
+      toast.style.opacity = '0';
+      setTimeout(()=> toast.style.display='none',380);
+    }, 3000);
+  }
+
+  const letterBox = document.getElementById('letterBox');
+  const revealBtn = document.getElementById('revealLetterBtn');
+  const resetBtn = document.getElementById('resetLetterBtn');
+
+  function prepareLetterReveal() {
+    letterBox.innerHTML = '';
+    letterParagraphs.forEach(p => {
+      const el = document.createElement('div');
+      el.className = 'para';
+      el.innerHTML = p;
+      letterBox.appendChild(el);
+    });
+    letterBox.scrollTop = 0;
+  }
+
+  let revealTimer = null;
+  function revealLetter() {
+    clearInterval(revealTimer);
+    const paras = Array.from(letterBox.querySelectorAll('.para'));
+    paras.forEach(el=> el.classList.remove('show'));
+    let i=0;
+    revealTimer = setInterval(()=>{
+      if(i >= paras.length){ clearInterval(revealTimer); return; }
+      paras[i].classList.add('show');
+      paras[i].scrollIntoView({behavior:'smooth', block:'center'});
+      i++;
+    }, 550);
+  }
+  function showAllLetter(){
+    clearInterval(revealTimer);
+    const paras = Array.from(letterBox.querySelectorAll('.para'));
+    paras.forEach(el=> el.classList.add('show'));
+  }
+
+  revealBtn.addEventListener('click', ()=> revealLetter());
+  resetBtn.addEventListener('click', ()=> showAllLetter());
+  prepareLetterReveal();
+
+  const miniList = document.getElementById('miniList');
+  function prepareMinis(){
+    miniList.innerHTML = '';
+    miniNotes.forEach(txt => {
+      const d = document.createElement('div');
+      d.className = 'mini';
+      d.tabIndex = 0;
+      d.textContent = txt;
+      d.addEventListener('click',()=> showToast(txt + ' — ❤️'));
+      miniList.appendChild(d);
+    });
+  }
+  function revealMinis(){
+    if(!miniList.children.length) prepareMinis();
+    Array.from(miniList.children).forEach((el, idx)=>{
+      setTimeout(()=> el.classList.add('show'), 150 + idx*160);
+    });
+  }
+  prepareMinis();
+
+  const player = document.getElementById('player');
+  const btnSingari = document.getElementById('btnSingari');
+  const btnNaam = document.getElementById('btnNaam');
+
+  function playSong(src){
+    player.src = src;
+    player.load();
+    player.play().then(()=> showToast('Playing')).catch(()=> showToast('Playback failed — try again'));
+  }
+
+  btnSingari.addEventListener('click', ()=> playSong('singari.mp3'));
+  btnNaam.addEventListener('click', ()=> playSong('naam-tera.mp3'));
+
+</script>
+
+</body>
+</html>
